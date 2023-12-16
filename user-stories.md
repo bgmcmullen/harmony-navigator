@@ -1,6 +1,6 @@
-#USER STORIES
+# USER STORIES
 
-##Beginner Level
+## Beginner Level
 As a beginner piano student just learning to read music, I want to train my ear to recognize the sound of a perfect 5th and perfect octave.
 ### Feature Tasks
 I can select which intervals I will be tested on as I use the webpage.\
