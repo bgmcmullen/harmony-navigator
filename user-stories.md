@@ -16,7 +16,7 @@ I can print out my results to show to my instructor.
 ### Acceptance Tests
 I have my results and I have achieved at least 80% on the intervals test and have the results from the website I can show my instructor.\
 ## Singer
-As a singing student I want a way to practice listening to and recognizing musical intervals to improve my singing.\
+As a singing student I want a way to practice listening to and recognizing musical intervals to improve my singing.
 ### Feature Tasks
 I can select which intervals I will be tested on as I use the webpage.\
 I can repeat the exercise as many times as necessary to get comfortable with the skills.
