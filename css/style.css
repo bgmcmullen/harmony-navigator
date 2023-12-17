@@ -18,6 +18,20 @@ h1{
   justify-content: center;
 }
 
+#select-button-container{
+  display: flex;
+  justify-content: center;
+}
+
+#select-button-container > button{
+  width: 8%;
+  font-weight: bold;
+  height: 50px;
+  margin: 0;
+  border: black solid;
+  background-color: white;
+}
+
 button {
   margin: 5px;
 }
