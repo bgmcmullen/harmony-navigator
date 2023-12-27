@@ -35,3 +35,8 @@ h1{
 button {
   margin: 5px;
 }
+
+#next-button{
+  position: absolute;
+  margin-top: 17px;
+}
