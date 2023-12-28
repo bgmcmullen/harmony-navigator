@@ -2,7 +2,7 @@
 
 const minorSecond = new Interval('m2', 'minor2', 'minor2');
 
-const majorSecond = new Interval('M2', 'minor2', 'minor2');
+const majorSecond = new Interval('M2', 'major2', 'major2');
 
 const minorThird = new Interval('m3', 'minor3', 'minor3');
 
@@ -25,16 +25,19 @@ const majorSeventh = new Interval('M7', 'major7', 'major7');
 const octave = new Interval('octave', 'octave', 'octave');
 
 // Global Variables
-let activeIntervals = [];
+let activeIntervals = ['m2', 'M2', 'm3', 'M3', 'p4', 'tritone', 'p5', 'm6', 'M6', 'm7', 'M7', 'octave'];
 let allIntervals = [minorSecond, majorSecond, minorThird, majorThird, perfectFourth, tritone, perfectFifth, minorSixth, majorSixth, minorSeventh, majorSeventh, octave];
+let awaitingAnswer = true;
 
 // DOM Windows
 const staffImage = document.getElementById('staff-image');
-const selectButtons = document.getElementById('select-button-container');
+const selectButtonContiner = document.getElementById('select-button-container');
+const selectButtons = Array.from(selectButtonContiner.children)
 const nextButton = document.getElementById("next-button");
 const buttons = document.getElementById('button-container');
 const audioElement = document.getElementById('interval-audio');
 const audioSource = document.getElementById('audio-source');
+const resetButton = document.getElementById('reset-button');
 
 // Create interval objects
 function Interval(type, audioFile, image){
@@ -45,7 +48,11 @@ function Interval(type, audioFile, image){
   this.successes = 0;
 }
 
-
+// Event Listeners
+buttons.addEventListener('click', handleButtonClick);
+selectButtonContiner.addEventListener('click', handleSelectButtonClick);
+nextButton.addEventListener('click', handleNextButton);
+resetButton.addEventListener('click', handleResetButton)
 
 let intervalArray = [];
 
@@ -56,11 +63,19 @@ function addIntervalsToArray(){
       intervalArray.push(allIntervals[i]);
     }
   }
+
 }
 
 let intervalIndex
 let fileIndex
 let intervalObject
+
+function loadActiveIntervals(){
+  let retrievedActiveIntervals = JSON.parse(localStorage.getItem('activeIntervals'));
+  if(retrievedActiveIntervals)
+    activeIntervals = retrievedActiveIntervals;
+  setActiveIntervalsColors();
+}
 
 function setInterval(){
   if(intervalArray.length === 0)
@@ -71,14 +86,23 @@ function setInterval(){
   intervalObject = intervalArray[intervalIndex];
   audioSource.src = `audio-files/${intervalObject.audioFile}-${fileIndex}.mp3`
   audioElement.load();
-  intervalObject.attempts++
+  awaitingAnswer = true;
 }
 
-setInterval()
+function loadIntervalOjects(){
+  let retrievedIntervals = JSON.parse(localStorage.getItem('intervals'));
+  if(retrievedIntervals)
+    allIntervals = retrievedIntervals;
+}
 
-buttons.addEventListener('click', handleButtonClick);
-selectButtons.addEventListener('click', handleSelectButtonClick);
-nextButton.addEventListener('click', setInterval);
+function handleNextButton(){
+  setInterval()
+  audioElement.play();
+}
+loadActiveIntervals()
+loadIntervalOjects()
+addIntervalsToArray()
+setInterval()
 
 function handleSelectButtonClick(event){
   if(event.target.id === "select-button-container")
@@ -86,25 +110,49 @@ function handleSelectButtonClick(event){
   let clickedButton = event.target;
   if(!activeIntervals.includes(clickedButton.id)){
     activeIntervals.push(clickedButton.id);
-    clickedButton.style.backgroundColor = 'green';
   } else {
     activeIntervals.splice(activeIntervals.indexOf(clickedButton.id), 1);
-    clickedButton.style.backgroundColor = '';
   }
+
+  setActiveIntervalsColors()
   addIntervalsToArray()
   setInterval()
+  localStorage.setItem('activeIntervals', JSON.stringify(activeIntervals));
 }
 
 function handleButtonClick(event){
+  if(event.target.id === "button-container" || awaitingAnswer === false)
+    return;
+  awaitingAnswer = false;
   if(event.target.id === intervalObject.type){
     alert('correct');
+    intervalObject.attempts++
     intervalObject.successes++;
   }
-  else if(event.target.id === "button-container")
-    return;
-  else 
+  else {
+    intervalObject.attempts++
     alert(`wrong ${intervalObject.type}: ${intervalObject.successes} / ${intervalObject.attempts} ${(intervalObject.successes / intervalObject.attempts) * 100}%`);
-  staffImage.src = `img/${intervalObject.image}-${fileIndex}.png`
+  }
+  staffImage.src = `img/${intervalObject.image}-${fileIndex}.png`;
+  // save to Local Storage
+  localStorage.setItem('intervals', JSON.stringify(allIntervals));
 }
 
+function handleResetButton(){
+  for(let i = 0; i < allIntervals.length; i++){
+    allIntervals[i].attempts = 0;
+    allIntervals[i].successes = 0;
+  }
+  localStorage.setItem('intervals', JSON.stringify(allIntervals));
+}
+
+function setActiveIntervalsColors(){
+  for(let i = 0; i < selectButtons.length; i++){
+    if(activeIntervals.includes(selectButtons[i].innerHTML)){
+      selectButtons[i].style.backgroundColor = 'green';
+    } else {
+      selectButtons[i].style.backgroundColor = 'white';
+    }
+  }
+}
 
