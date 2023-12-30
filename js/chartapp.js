@@ -18,13 +18,14 @@ function loadIntervalOjects(){
 
 function createLables() {
   for(let i = 0; i < allIntervals.length; i++){
-    lablesArray.push((allIntervals[i].attempts != 0) ? `${allIntervals[i].type} ${Math.round((allIntervals[i].successes/allIntervals[i].attempts) * 100)} %` : allIntervals[i].type);
+    lablesArray.push((allIntervals[i].attempts != 0) ? `${allIntervals[i].type} ${Math.round((allIntervals[i].successes/allIntervals[i].attempts) * 100)}%` : allIntervals[i].type);
     successArray.push(allIntervals[i].successes);
     attemptsArray.push(allIntervals[i].attempts)
   }
 }
 
 function buildChart() {
+  Chart.defaults.font.size = 17;
   let chartObj = {
     type: 'bar',
     data: {
@@ -32,24 +33,40 @@ function buildChart() {
       datasets: [{
         label: 'Successes',
         data: successArray,
-        borderWidth: 5,
         backgroundColor: 'blue',
-        borderColor: 'red'
       },
       {
         label: 'Attempts',
         data: attemptsArray,
-        borderWidth: 5,
         backgroundColor: 'red',
-        borderColor: 'blue',
       }
     ]
   },
     options: {
+      
+              plugins: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        size: 20,
+                    },
+                    color: 'black'
+                }
+            }
+        },
   
       scales: {
         y: {
-          beginAtZero: true,
+          ticks: {
+            color: 'black',
+          },
+          beginAtZero: true
+        },
+        x: {
+          ticks: {
+            color: 'black'
+          },
         }
       }
     }
