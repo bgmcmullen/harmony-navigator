@@ -28,6 +28,8 @@ const octave = new Interval('octave', 'octave', 'octave');
 let activeIntervals = ['m2', 'M2', 'm3', 'M3', 'p4', 'tritone', 'p5', 'm6', 'M6', 'm7', 'M7', 'octave'];
 let allIntervals = [minorSecond, majorSecond, minorThird, majorThird, perfectFourth, tritone, perfectFifth, minorSixth, majorSixth, minorSeventh, majorSeventh, octave];
 let awaitingAnswer = true;
+let answeredWrong = false;
+let wrongAnswersGiven = [];
 
 // DOM Windows
 const staffImage = document.getElementById('staff-image');
@@ -39,6 +41,7 @@ const answerButtons = Array.from(buttons.children);
 const audioElement = document.getElementById('interval-audio');
 const audioSource = document.getElementById('audio-source');
 const resetButton = document.getElementById('reset-button');
+const resultBox = document.getElementById('result-box');
 
 // Create interval objects
 function Interval(type, audioFile, image){
@@ -53,7 +56,7 @@ function Interval(type, audioFile, image){
 buttons.addEventListener('click', handleButtonClick);
 selectButtonContiner.addEventListener('click', handleSelectButtonClick);
 nextButton.addEventListener('click', handleNextButton);
-resetButton.addEventListener('click', handleResetButton)
+resetButton.addEventListener('click', handleResetButton);
 
 let intervalArray = [];
 
@@ -81,13 +84,15 @@ function loadActiveIntervals(){
 function setInterval(){
   if(intervalArray.length === 0)
     return;
+  resultBox.innerHTML = '';
   staffImage.src = '';
   intervalIndex = Math.floor(Math.random() * intervalArray.length);
   fileIndex = Math.floor(Math.random() * 10) + 1;
   intervalObject = intervalArray[intervalIndex];
-  audioSource.src = `audio-files/${intervalObject.audioFile}-${fileIndex}.mp3`
+  audioSource.src = `audio-files/${intervalObject.audioFile}-${fileIndex}.3.wav`
   audioElement.load();
   awaitingAnswer = true;
+  answeredWrong = false;
 }
 
 function loadIntervalOjects(){
@@ -124,15 +129,27 @@ function handleSelectButtonClick(event){
 function handleButtonClick(event){
   if(event.target.id === "button-container" || awaitingAnswer === false)
     return;
-  awaitingAnswer = false;
+  
   if(event.target.id === intervalObject.type){
-    alert('correct');
-    intervalObject.attempts++
-    intervalObject.successes++;
+    resultBox.innerHTML = `CORRECT! ${event.target.id}`;
+    resultBox.style.color = 'green';
+    if(answeredWrong === false){
+      intervalObject.attempts++
+      intervalObject.successes++;
+    }
+    awaitingAnswer = false;
   }
   else {
-    intervalObject.attempts++
-    alert(`wrong ${intervalObject.type}: ${intervalObject.successes} / ${intervalObject.attempts} ${(intervalObject.successes / intervalObject.attempts) * 100}%`);
+    if(answeredWrong === false)
+      intervalObject.attempts++
+    answeredWrong = true;
+    resultBox.innerHTML = 'TRY AGAIN';
+    resultBox.style.color = 'red';
+    wrongAnswersGiven.push(event.target.style.backgroundColor = 'red')
+    return;
+  }
+  for(let i = 0; i < answerButtons.length; i++){
+    answerButtons[i].style.backgroundColor = '';
   }
   staffImage.src = `img/${intervalObject.image}-${fileIndex}.png`;
   // save to Local Storage
