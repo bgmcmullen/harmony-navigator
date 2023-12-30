@@ -1,24 +1,29 @@
 'use strict';
 
-let allIntervals = [];
-
+// Get chart element 
 const ctx = document.getElementById('myChart');
 
-
-
+// Global variables
+let allIntervals = [];
 let lablesArray = [];
 let successArray = [];
 let attemptsArray = [];
 
+// Load interval objects from local storage
 function loadIntervalOjects(){
   let retrievedIntervals = JSON.parse(localStorage.getItem('intervals'));
   if(retrievedIntervals)
     allIntervals = retrievedIntervals;
 }
 
+// Create labels for chart
 function createLables() {
   for(let i = 0; i < allIntervals.length; i++){
+
+    // Include percentage in label if answers exist
     lablesArray.push((allIntervals[i].attempts != 0) ? `${allIntervals[i].type} ${Math.round((allIntervals[i].successes/allIntervals[i].attempts) * 100)}%` : allIntervals[i].type);
+
+    // Add success and atempts to arrays
     successArray.push(allIntervals[i].successes);
     attemptsArray.push(allIntervals[i].attempts)
   }
@@ -31,7 +36,7 @@ function buildChart() {
     data: {
       labels: lablesArray,
       datasets: [{
-        label: 'Successes',
+        label: 'Successes (On first try)',
         data: successArray,
         backgroundColor: 'blue',
       },
@@ -47,7 +52,6 @@ function buildChart() {
               plugins: {
             legend: {
                 labels: {
-                    // This more specific font property overrides the global property
                     font: {
                         size: 20,
                     },
@@ -74,6 +78,7 @@ function buildChart() {
   new Chart(ctx, chartObj);
 }
 
+// Load results page
 loadIntervalOjects();
 createLables();
 buildChart();
