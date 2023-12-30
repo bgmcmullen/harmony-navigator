@@ -50,6 +50,7 @@ h2{
   height: 50px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-size: 35px;
+  animation: red-glow 1.5s ease infinite;
 }
 
 .staff-image-continer{
@@ -147,4 +148,19 @@ label{
   100% {
     transform: rotateY(0deg) rotateZ(0deg);
   }
+}
+
+@keyframes red-glow{
+  0% {
+    color: red;
+  }
+
+  50%{
+    color: rgb(161, 0, 0);
+  }
+
+  100% {
+    transform: red;;
+  }
+
 }
