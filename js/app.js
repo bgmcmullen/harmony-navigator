@@ -79,6 +79,7 @@ function setInterval(){
   // Clear result box and staff image
   resultBox.innerHTML = '';
   staffImage.src = '';
+  staffImage.style.display = 'none';
 
   // Randomly set interval index
   intervalIndex = Math.floor(Math.random() * intervalArray.length);
@@ -175,6 +176,7 @@ function handleButtonClick(event){
     answerButtons[i].style.backgroundColor = '';
   }
   staffImage.src = `img/${intervalObject.image}-${fileIndex}.png`;
+  staffImage.style.display = '';
   // Save to Local Storage
   localStorage.setItem('intervals', JSON.stringify(allIntervals));
 }
