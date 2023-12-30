@@ -35,6 +35,7 @@ const selectButtonContiner = document.getElementById('select-button-container');
 const selectButtons = Array.from(selectButtonContiner.children)
 const nextButton = document.getElementById("next-button");
 const buttons = document.getElementById('button-container');
+const answerButtons = Array.from(buttons.children);
 const audioElement = document.getElementById('interval-audio');
 const audioSource = document.getElementById('audio-source');
 const resetButton = document.getElementById('reset-button');
@@ -150,8 +151,19 @@ function setActiveIntervalsColors(){
   for(let i = 0; i < selectButtons.length; i++){
     if(activeIntervals.includes(selectButtons[i].innerHTML)){
       selectButtons[i].style.backgroundColor = 'green';
+      selectButtons[i].style.textDecoration = '';
+      selectButtons[i].style.fontWeight = 'bold';
     } else {
       selectButtons[i].style.backgroundColor = 'white';
+      selectButtons[i].style.textDecoration = 'line-through';
+      selectButtons[i].style.fontWeight = '';
+    }
+  }
+  for(let i = 0; i < answerButtons.length; i++){
+    if(activeIntervals.includes(answerButtons[i].innerHTML)){
+      answerButtons[i].style.display = '';
+    } else {
+      answerButtons[i].style.display = 'none';
     }
   }
 }

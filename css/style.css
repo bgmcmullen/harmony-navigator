@@ -1,3 +1,8 @@
+body{
+  background-color: grey;
+  min-width: 950px;
+}
+
 header{
   border: 2px solid aqua
 }
@@ -20,7 +25,7 @@ li{
 }
 
 li:hover{
-  animation: spin-animation 2.5s linear infinite;
+  animation: spin-animation 1.5s linear infinite;
 }
 
 h2{
@@ -31,14 +36,27 @@ h2{
 }
 
 .staff-image-continer{
-  height: 350px;
+  display: inline;
+  height: 200px;
+  width: 300px;
+  margin: 50px auto;
   display: flex;
   justify-content: center;
+  background: white;
 }
+
 
 #button-container{
   display: flex;
   justify-content: center;
+}
+
+#button-container > button{
+  display: inline;
+  font-size: 25px;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #select-button-container{
@@ -48,36 +66,68 @@ h2{
 
 #select-button-container > button{
   width: 8%;
-  font-weight: bold;
   height: 50px;
   margin: 0;
   border: black solid;
   background-color: green;
+  font-size: 20px;
+}
+
+button:hover{
+opacity: .6;
 }
 
 button {
   margin: 5px;
 }
 
+audio{
+  height: 40px;
+}
+
 #next-button{
   position: absolute;
-  margin-top: 17px;
+  margin: 0 auto;
+  margin-left: 5px;
+  height: 40px;
+  font-weight: bold;
+  background-color: orangered;
 }
 
 #reset-button{
-  float: right;
+  position: fixed;
+  right: 20px;
+  bottom: 35px;
+  background-color: blue;
+  color: white;
+  height: 50px;
+}
+
+label{
+  display: block;
+  margin-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
 
 @keyframes spin-animation {
   0% {
-    transform: rotateY(0deg);
+    transform: rotateY(0deg) rotateZ(0deg);
+  }
+
+  25%{
+    transform: rotateY(25deg) rotateZ(10deg);
   }
 
   50%{
-    transform: rotateY(180deg);
+    transform: rotateY(0deg) rotateZ(0deg);
+  }
+
+  75%{
+    transform: rotateY(-25deg) rotateZ(-10deg);
   }
 
   100% {
-    transform: rotateY(360deg);
+    transform: rotateY(0deg) rotateZ(0deg);
   }
 }
