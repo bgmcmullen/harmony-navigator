@@ -96,6 +96,7 @@ function setInterval(){
 
   awaitingAnswer = true;
   answeredWrong = false;
+  resetAnswerButtonColors()
 }
 
 // Load active intervals from local storage
@@ -171,10 +172,7 @@ function handleButtonClick(event){
     return;
   }
 
-  // Reset button colors
-  for(let i = 0; i < answerButtons.length; i++){
-    answerButtons[i].style.backgroundColor = '';
-  }
+  resetAnswerButtonColors();
   staffImage.src = `img/${intervalObject.image}-${fileIndex}.png`;
   staffImage.style.display = '';
   // Save to Local Storage
@@ -209,6 +207,13 @@ function setActiveIntervalsColors(){
     } else {
       answerButtons[i].style.display = 'none';
     }
+  }
+}
+
+function resetAnswerButtonColors(){
+  // Reset button colors
+  for(let i = 0; i < answerButtons.length; i++){
+    answerButtons[i].style.backgroundColor = '';
   }
 }
 
