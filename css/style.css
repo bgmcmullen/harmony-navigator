@@ -92,11 +92,11 @@ h2{
   border: black solid;
   background-color: green;
   font-size: 20px;
-  text-align: center; /* Center text horizontally */
-  color: black; /* Explicitly set text color */
+  text-align: center;
+  color: black !important;
   display: flex;
-  align-items: center; /* Center text vertically */
-  justify-content: center; /* Center text horizontally */
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover{
