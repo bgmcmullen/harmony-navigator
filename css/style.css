@@ -92,6 +92,7 @@ h2{
   border: black solid;
   background-color: green;
   font-size: 20px;
+  text-align: center;
 }
 
 button:hover{
