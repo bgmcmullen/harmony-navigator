@@ -1,6 +1,6 @@
 body{
   background-color: lightgrey;
-  min-width: 950px;
+  min-width: none;
 }
 
 header{
@@ -66,6 +66,7 @@ h2{
 
 #button-container{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -80,11 +81,13 @@ h2{
 #select-button-container{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 #select-button-container > button{
   width: 8%;
   height: 50px;
+  min-width: 80px;
   margin: 0;
   border: black solid;
   background-color: green;
