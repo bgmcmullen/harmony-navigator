@@ -1,4 +1,4 @@
-# ear-training-practice
+# Harmony Navigator
 
 
 ## Description
