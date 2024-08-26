@@ -13,17 +13,17 @@ You can access the Harmony Navigator website at the following link:
 Harmony Navigator
 
 ## Instructions
-Select Intervals: Start by selecting the intervals you wish to practice by clicking the buttons at the top of the page.
-Test Your Ear: Listen to the interval played and choose your answer from the buttons at the bottom of the screen.
-Next Interval: Click "Next Interval" to hear another interval.
-View Results: At any time, you can select "View Results Chart" to see your performance, including how many attempts you made and your first-attempt accuracy.
+Select Intervals: Start by selecting the intervals you wish to practice by clicking the buttons at the top of the page.\
+Test Your Ear: Listen to the interval played and choose your answer from the buttons at the bottom of the screen.\
+Next Interval: Click "Next Interval" to hear another interval.\
+View Results: At any time, you can select "View Results Chart" to see your performance, including how many attempts you made and your first-attempt accuracy.\
 
 ## Technologies Used
 
-GitHub: Version control and hosting.
-VSCode: Code editor for development.
-Sibelius: Music notation software used in the project.
-Logic Pro: Digital audio workstation used for audio processing.
+GitHub: Version control and hosting.\
+VSCode: Code editor for development.\
+Sibelius: Music notation software used in the project.\
+Logic Pro: Digital audio workstation used for audio processing.\
 
 ## Author
 
