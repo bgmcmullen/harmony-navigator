@@ -17,8 +17,8 @@ Select Intervals: Start by selecting the intervals you wish to practice by click
 Test Your Ear: Listen to the interval played and choose your answer from the buttons at the bottom of the screen.\
 Next Interval: Click "Next Interval" to hear another interval.\
 View Results: At any time, you can select "View Results Chart" to see your performance, including how many attempts you made and your first-attempt accuracy.
-<div>
-  <img src="screen-shots/p1.png" style="width: 1fr"></img><img src="screen-shots/p2.png" style="width: 1fr"></img>
+<div style="display: flex; justify-content: space-between;">
+  <img src="screen-shots/p1.png" style="width: 48%;"></img><img src="screen-shots/p2.png" style="width: 48%"></img>
 </div>
 
 
