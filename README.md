@@ -18,7 +18,7 @@ Test Your Ear: Listen to the interval played and choose your answer from the but
 Next Interval: Click "Next Interval" to hear another interval.\
 View Results: At any time, you can select "View Results Chart" to see your performance, including how many attempts you made and your first-attempt accuracy.
 <div style="display: flex; justify-content: space-between;">
-  <img src="screen-shots/p1.png" style="width: 48%;"></img><img src="screen-shots/p2.png" style="width: 48%"></img>
+  <img src="screen-shots/p1.png" style="width: 35%;"></img><img src="screen-shots/p2.png" style="width: 35%"></img>
 </div>
 
 
