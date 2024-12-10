@@ -36,6 +36,9 @@ const audioElement = document.getElementById('interval-audio');
 const audioSource = document.getElementById('audio-source');
 const resetButton = document.getElementById('reset-button');
 const resultBox = document.getElementById('result-box');
+const botTextArea = document.getElementById('bot-chat');
+const sendMessageButton = document.getElementById('send-message-button');
+const botResponse = document.getElementById('bot-response');
 
 // Interval Contructor
 function Interval(type, audioFile, image){
@@ -51,6 +54,57 @@ buttons.addEventListener('click', handleButtonClick);
 selectButtonContiner.addEventListener('click', handleSelectButtonClick);
 nextButton.addEventListener('click', handleNextButton);
 resetButton.addEventListener('click', handleResetButton);
+botTextArea.addEventListener('change', handleBotTextAreaChange);
+sendMessageButton.addEventListener('click', sendBotMessage)
+
+let botText = '';
+
+function sendBotMessage() {
+
+  fetch('http://127.0.0.1:5000/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({"input":botTextArea.value}),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data =>  {
+      botResponse.innerHTML = '';
+      botText = data.response
+      index = 0;
+      tempContent = '';
+      streamText();
+    })
+    .catch(error => console.error('Error:', error));
+
+}
+
+let index = 0;
+let tempContent = '';
+function streamText() {
+  if (index < botText.length) {
+    const chunk = botText.substring(index, index + 10);
+    tempContent += chunk; // Accumulate the valid content
+    botResponse.innerHTML = tempContent; // Update the DOM with valid HTML
+    index += 10;
+    setTimeout(streamText, 50);
+  } else {
+    botResponse.innerHTML = botText; // Ensure the full text is added at the end
+  }
+}
+
+
+function handleBotTextAreaChange(){
+  // alert(botTextArea.value);
+}
+
+
 
 // Add all active interval objects to array
 function addIntervalsToArray(){
