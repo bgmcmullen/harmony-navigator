@@ -1,7 +1,7 @@
 'use strict';
 
 // Interval Objects
-const minorSecond = new Interval('m2', 'minor2', 'minor2');;
+const minorSecond = new Interval('m2', 'minor2', 'minor2');
 const majorSecond = new Interval('M2', 'major2', 'major2');
 const minorThird = new Interval('m3', 'minor3', 'minor3');
 const majorThird = new Interval('M3', 'major3', 'major3');
