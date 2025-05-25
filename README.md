@@ -1,4 +1,4 @@
-# Harmony Navigator
+# Harmony Navigato
 
 Harmony Navigator is a web-based tool designed to help users improve their ability to recognize musical intervals by ear. This application allows users to customize their practice by selecting specific intervals to be tested on and provides insightful feedback through a results chart that tracks their progress.
 
